@@ -11,42 +11,41 @@ class BooksApp extends React.Component {
      }
 
   componentDidMount(){
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books: books })
+    this.fetchmoveShelf();
+     }
+
+  fetchmoveShelf = () => {
+  BooksAPI.getAll().then((books) => {
+    this.setState({ Book: books });
     })
   }
 
-moveShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((books);
+updatemoveShelf = (book, shelf).then(() => {
+  this.fetchmoveShelf();
+     });
+   }
 
-  BooksAPI.getALL().then((books) => {
-      this.setState({ books: books })
-  })
-}
-
-  render() {
+render() {
     return (
        <div className="app">
-
      <Route exact path="/" render={() => (
-      <MainPage
+      <Book
       books={this.state.books}
-       moveShelf={this.state.books}
+       onChange={this.state.updatemoveShelf}
        />
       )}
       />
 <Route exact path="/search" render={() => (
       <SearchPage
-         moveShelf={this.moveShelf}
+         moveShelf={this.updatemoveShelf}
          books={this.state.books}
          />
         )}
         />
 </div>
       )
-
     }
-
  }
 
 export default BooksApp;
+
